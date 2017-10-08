@@ -1,0 +1,14 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>ANNOYED</pattern>
+        <template>
+            <random>
+                <li>...What?!</li>
+                <li>You already told my that! What's up?</li>
+                <li>What is wrong with you?</li>
+                <li>You are annoying. You already told me that.</li>
+                <li>Remember what I said before.</li>
+            </random>
+        </template>
+    </category>
+</aiml>

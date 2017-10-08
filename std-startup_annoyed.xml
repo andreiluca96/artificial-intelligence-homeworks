@@ -3,7 +3,7 @@
     <category>
         <pattern>LOAD AIML B</pattern>
         <template>
-            <learn>basic_chat.aiml</learn>
+            <learn>annoyed_bot.aiml</learn>
         </template>
     </category>
 

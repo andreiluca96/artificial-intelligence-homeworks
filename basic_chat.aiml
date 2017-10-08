@@ -58,10 +58,12 @@
 
     <category>
 
-    <pattern>MY OCCUPATION IS *</pattern>
-    <template>
-        <think><set name="occupation" ><star/></set></think>
-        How nice..
-    </template>
+        <pattern>MY OCCUPATION IS *</pattern>
+        <template>
+            <think><set name="occupation" ><star/></set></think>
+            How nice..
+        </template>
     </category>
+
+
 </aiml>
