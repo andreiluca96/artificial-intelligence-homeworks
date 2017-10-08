@@ -26,11 +26,11 @@
 
             <random>
 
-                <li>And...how old are you, <formal><set name="name"><star/></set></formal>?</li>
-                <li>I'm curious about your age, <formal><set name="name"><star/></set></formal>?</li>
-                <li>I'm just curious, how old are you, <formal><set name="name"><star/></set></formal>?</li>
-                <li>We might have the same age. How old are you, <formal><set name="name"><star/></set></formal>?</li>
-                <li>Nice to meet you. How old are you, <formal><set name="name"><star/></set></formal>?</li>
+                <li>And...how old are you, <formal><set name="username"><star/></set></formal>?</li>
+                <li>I'm curious about your age, <formal><set name="username"><star/></set></formal>?</li>
+                <li>I'm just curious, how old are you, <formal><set name="username"><star/></set></formal>?</li>
+                <li>We might have the same age. How old are you, <formal><set name="username"><star/></set></formal>?</li>
+                <li>Nice to meet you. How old are you, <formal><set name="username"><star/></set></formal>?</li>
 
             </random>
 
