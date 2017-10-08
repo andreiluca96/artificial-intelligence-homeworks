@@ -1,13 +1,13 @@
 <aiml version="1.0.1" encoding="UTF-8">
 
     <category>
-        <pattern>HELLO *</pattern>
+        <pattern>HELLO</pattern>
 
         <template>
             <random>
 
                 <li>Hi! What's your name?</li>
-                <li>Hello! Can you tell me your name</li>
+                <li>Hello! Can you tell me your name?</li>
                 <li>Hi! Who am I talking to?</li>
                 <li>Oh, Hi! Tell me your name so we can start a conversation.</li>
                 <li>Hey! Have we talk before? What's your name?</li>
@@ -26,11 +26,11 @@
 
             <random>
 
-                <li>And...how old are you?</li>
-                <li>I'm curious about your age.</li>
-                <li>I'm just curious, how old are you?</li>
-                <li>We might have the same age. How old are you</li>
-                <li>Nice to meet you. How old are you?</li>
+                <li>And...how old are you, <formal><set name="name"><star/></set></formal>?</li>
+                <li>I'm curious about your age, <formal><set name="name"><star/></set></formal>?</li>
+                <li>I'm just curious, how old are you, <formal><set name="name"><star/></set></formal>?</li>
+                <li>We might have the same age. How old are you, <formal><set name="name"><star/></set></formal>?</li>
+                <li>Nice to meet you. How old are you, <formal><set name="name"><star/></set></formal>?</li>
 
             </random>
 
@@ -43,19 +43,25 @@
     <pattern>I AM *</pattern>
 
     <template>
-
+        <set name="age" ><star/>...</set>
         <random>
-
             <li>And...what's your job?</li>
             <li>I'm curious about your occupation.</li>
             <li>I'm just curious, are you an employee?</li>
-            <li>What are you doing for living</li>
-            <li>Are you an employee or what's your occupation?</li>
-
+            <li>What are you doing for living?</li>
+            <li>And...What's your occupation?</li>
         </random>
 
     </template>
 
     </category>
 
+    <category>
+
+    <pattern>MY OCCUPATION IS *</pattern>
+    <template>
+        <think><set name="occupation" ><star/></set></think>
+        How nice..
+    </template>
+    </category>
 </aiml>
