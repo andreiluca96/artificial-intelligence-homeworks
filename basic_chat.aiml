@@ -1,19 +1,63 @@
 <aiml version="1.0.1" encoding="UTF-8">
 
-<!-- basic_chat.aiml -->
-
     <category>
-        <pattern>HELLO</pattern>
+
+        <pattern> Hello *</pattern>
+
         <template>
-            Well, hello!
+
+            <random>
+
+                <li>Hi! What's your name?</li>
+                <li>Hello! Can you tell me your name</li>
+                <li>Hi! Who am I talking to?</li>
+                <li>Oh, Hi! Tell me your name so we can start a conversation.</li>
+                <li>Hey! Have we talk before? What's your name?</li>
+
+            </random>
+
         </template>
+
     </category>
 
     <category>
-        <pattern>WHAT ARE YOU</pattern>
+
+        <pattern>My name is *</pattern>
+
         <template>
-            I'm a bot, silly!
+
+            <random>
+
+                <li>And...how old are you?</li>
+                <li>I'm curious about your age.</li>
+                <li>I'm just curious, how old are you?</li>
+                <li>We might have the same age. How old are you</li>
+                <li>Nice to meet you. How old are you?</li>
+
+            </random>
+
         </template>
+
+    </category>
+
+      <category>
+
+        <pattern>I am *</pattern>
+
+        <template>
+
+            <random>
+
+                <li>And...what's your job?</li>
+                <li>I'm curious about your occupation.</li>
+                <li>I'm just curious, are you an employee?</li>
+                <li>What are you doing for living</li>
+                <li>Are you an employee or what's your occupation?</li>
+
+            </random>
+
+        </template>
+
     </category>
 
 </aiml>
