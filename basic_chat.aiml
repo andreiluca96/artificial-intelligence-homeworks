@@ -1,11 +1,9 @@
 <aiml version="1.0.1" encoding="UTF-8">
 
     <category>
-
-        <pattern> Hello *</pattern>
+        <pattern>HELLO *</pattern>
 
         <template>
-
             <random>
 
                 <li>Hi! What's your name?</li>
@@ -22,7 +20,7 @@
 
     <category>
 
-        <pattern>My name is *</pattern>
+        <pattern>MY NAME IS *</pattern>
 
         <template>
 
@@ -40,23 +38,23 @@
 
     </category>
 
-      <category>
+    <category>
 
-        <pattern>I am *</pattern>
+    <pattern>I AM *</pattern>
 
-        <template>
+    <template>
 
-            <random>
+        <random>
 
-                <li>And...what's your job?</li>
-                <li>I'm curious about your occupation.</li>
-                <li>I'm just curious, are you an employee?</li>
-                <li>What are you doing for living</li>
-                <li>Are you an employee or what's your occupation?</li>
+            <li>And...what's your job?</li>
+            <li>I'm curious about your occupation.</li>
+            <li>I'm just curious, are you an employee?</li>
+            <li>What are you doing for living</li>
+            <li>Are you an employee or what's your occupation?</li>
 
-            </random>
+        </random>
 
-        </template>
+    </template>
 
     </category>
 
