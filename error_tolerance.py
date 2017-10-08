@@ -1,3 +1,6 @@
+import re
+
+
 def are_similar(s1, s2, allowed_number_of_wrong_characters):
     letters1 = []
     letters2 = []
@@ -22,7 +25,19 @@ def are_similar(s1, s2, allowed_number_of_wrong_characters):
     return False
 
 
-s1 = raw_input("Enter the first string: ")
-s2 = raw_input("Enter the second string: ")
+def get_similar_template(given_input):
+    f = open("basic_chat.aiml")
+    file_content = f.read()
+    while True:
+        patterns = re.search('<pattern>((\w)*\**(\s)*)*</pattern>', file_content)
 
-print (are_similar(s1, s2, 2))
+        if patterns is None:
+            break
+
+        template = file_content[patterns.start() + 9: patterns.end() - 10]
+
+        file_content = file_content[patterns.end():]
+        if are_similar(template, given_input, given_input / 4):
+            return template
+
+    return None
