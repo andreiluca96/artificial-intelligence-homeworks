@@ -1,6 +1,14 @@
 <aiml version="1.0.1" encoding="UTF-8">
 
     <category>
+        <pattern>*</pattern>
+
+        <template>
+            Nothing
+        </template>
+
+    </category>
+    <category>
         <pattern>HELLO</pattern>
 
         <template>
@@ -43,7 +51,7 @@
     <pattern>I AM *</pattern>
 
     <template>
-        <set name="age" ><star/>...</set>
+        <set name="age" ><star/></set>
         <random>
             <li>And...what's your job?</li>
             <li>I'm curious about your occupation.</li>

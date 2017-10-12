@@ -1,0 +1,66 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>PROGRAMMER</pattern>
+        <template>
+            <random>
+                <li>So have you seen the latest Java changes? You should check them, those changes are amazing.</li>
+                <li>I heard that a new version of C++ will be release. Check this out!</li>
+                <li>Did you know? Programming is 10% science, 20% ingenuity, and 70% getting the ingenuity to work with the science.</li>
+                <li>There are only 10 kinds of people in this world: those who know binary and those who don’t.</li>
+                <li>Debugging: Removing the needles from the haystack.</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>TEACHER</pattern>
+        <template>
+            <random>
+                <li>So what are your students doing?.</li>
+                <li>Did you heard the last law about the education system?</li>
+                <li>It's a great honor to speak with a teacher.</li>
+                <li>The most important person in my life was a teacher.</li>
+                <li>Did you prepared the homework for your students.</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CHILD</pattern>
+        <template>
+            <random>
+                <li>What's you average grade?</li>
+                <li>Do you like the things that you do in faculty?</li>
+                <li>Do you feel like the faculty is enough for you to find a job when you'll finish?</li>
+                <li>The student life is amazing, you are very lucky.</li>
+                <li>Be careful, you might have to learn for the exam.</li>
+            </random>
+        </template>
+    </category>
+
+        <category>
+        <pattern>TEENAGER</pattern>
+        <template>
+            <random>
+                <li>What's you average grade?</li>
+                <li>Do you like the things that you do in faculty?</li>
+                <li>Do you feel like the faculty is enough for you to find a job when you'll finish?</li>
+                <li>The student life is amazing, you are very lucky.</li>
+                <li>Be careful, you might have to learn for the exam.</li>
+            </random>
+        </template>
+    </category>
+
+        <category>
+        <pattern>ADULT</pattern>
+        <template>
+            <random>
+                <li>What's you average grade?</li>
+                <li>Do you like the things that you do in faculty?</li>
+                <li>Do you feel like the faculty is enough for you to find a job when you'll finish?</li>
+                <li>The student life is amazing, you are very lucky.</li>
+                <li>Be careful, you might have to learn for the exam.</li>
+            </random>
+        </template>
+    </category>
+</aiml>
