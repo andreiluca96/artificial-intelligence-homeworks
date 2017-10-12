@@ -1,5 +1,5 @@
-!!python/unicode 'Andrei': {age: '', occupation: ''}
+!!python/unicode 'ASD': {age: !!python/unicode '13', occupation: !!python/unicode 'PROGRAMMER'}
 !!python/unicode 'Ariana': {age: !!python/unicode '13 years old...', occupation: !!python/unicode 'student'}
-!!python/unicode 'andrei': {age: '', occupation: ''}
+!!python/unicode 'TATA': {age: '', occupation: ''}
 !!python/unicode 'blabla': {age: !!python/unicode '12', occupation: !!python/unicode 'programmer'}
 !!python/unicode 'tata': {age: !!python/unicode '13...', occupation: !!python/unicode 'student'}

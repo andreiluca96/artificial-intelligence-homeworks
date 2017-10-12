@@ -1,5 +1,5 @@
 import re
-
+import math
 
 def are_similar(s1, s2, allowed_number_of_wrong_characters):
     letters1 = []
@@ -37,7 +37,12 @@ def get_similar_template(given_input):
         template = file_content[patterns.start() + 9: patterns.end() - 10]
 
         file_content = file_content[patterns.end():]
-        if are_similar(template, given_input, given_input / 4):
+
+        if template == "*":
+            continue
+        if template.find("*") < 0 and are_similar(template, given_input, math.log(len(given_input))  + 1):
             return template
+        if are_similar(template[:template.find("*")], given_input[:template.find("*")].upper(), math.log(len(given_input)) + 1):
+            return template[:template.find("*")] + given_input[template.find("*"):]
 
     return None
