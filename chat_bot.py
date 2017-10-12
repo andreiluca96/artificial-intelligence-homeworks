@@ -3,6 +3,7 @@ from random import randint
 
 from storage import load_dictionary, write_dictionary
 
+
 def map_age(age):
     if int(age) < 14:
         return "CHILD"
@@ -25,6 +26,7 @@ specialized_bot.learn("std-startup_specialized.xml")
 specialized_bot.respond("load aiml b")
 
 conversation_metadata_filename = "conversation_metadata.yaml"
+questions_asked_filename = "questions_asked.yaml"
 
 session_id = 12345
 
@@ -36,6 +38,11 @@ while True:
     conversation_metadata = load_dictionary(conversation_metadata_filename)
     if conversation_metadata is None:
         conversation_metadata = dict()
+
+    questions_asked = load_dictionary(questions_asked_filename)
+    if questions_asked is None:
+        questions_asked = dict()
+
     if message == "quit":
         exit()
     else:
@@ -47,7 +54,7 @@ while True:
 
             username = kernel.getPredicate('username', session_id)
             if len(username) > 0:
-                if username in conversation_metadata\
+                if username in conversation_metadata \
                         and 'occupation' in conversation_metadata[username] \
                         and 'age' in conversation_metadata[username] \
                         and len(conversation_metadata[username]['occupation']) > 0 \
@@ -69,14 +76,25 @@ while True:
 
             write_dictionary(conversation_metadata, conversation_metadata_filename)
 
-            print kernel.getPredicate('occupation', session_id)
-            print kernel.getPredicate('age', session_id)
-
             if len(kernel.getPredicate('occupation', session_id)) and len(kernel.getPredicate('age', session_id)):
-                if randint(0, 1) == 0:
-                    print (specialized_bot.respond(kernel.getPredicate('occupation', session_id)))
-                else:
-                    print (specialized_bot.respond(map_age(kernel.getPredicate('age', session_id))))
+                question = ' '
 
+                if username not in questions_asked:
+                    questions_asked[username] = set()
+                questions_asked[username].add(' ')
+                while question in questions_asked[username] and len(questions_asked[username]) < 6: # TO DO: change to 11
+                    if randint(0, 1) == 0:
+                        question = specialized_bot.respond(kernel.getPredicate('occupation', session_id))
+                    else:
+                        question = specialized_bot.respond(map_age(kernel.getPredicate('age', session_id)))
+
+                if question == ' ':
+                    print "I don't know what should i tell you know."
+                else:
+                    questions_asked[username].add(question)
+                    questions_asked[username].remove(' ')
+                    write_dictionary(questions_asked, questions_asked_filename)
+
+                    print question
             else:
                 print (bot_response)

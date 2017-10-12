@@ -26,7 +26,7 @@
     </category>
 
     <category>
-        <pattern>CHILD</pattern>
+        <pattern>STUDENT</pattern>
         <template>
             <random>
                 <li>What's you average grade?</li>
@@ -37,6 +37,20 @@
             </random>
         </template>
     </category>
+
+    <category>
+        <pattern>CHILD</pattern>
+        <template>
+            <random>
+                <li>So what are your students doing?.</li>
+                <li>Did you heard the last law about the education system?</li>
+                <li>It's a great honor to speak with a teacher.</li>
+                <li>The most important person in my life was a teacher.</li>
+                <li>Did you prepared the homework for your students.</li>
+            </random>
+        </template>
+    </category>
+
 
         <category>
         <pattern>TEENAGER</pattern>
