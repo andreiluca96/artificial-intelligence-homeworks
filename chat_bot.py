@@ -4,6 +4,14 @@ from random import randint
 from error_tolerance import get_similar_template
 from storage import load_dictionary, write_dictionary
 
+from threading import Timer
+import time
+
+
+def timeout():
+    if is_timeout:
+        print "Are u there?"
+
 
 def map_age(age):
     if int(age) < 16:
@@ -13,6 +21,10 @@ def map_age(age):
     if int(age) > 25:
         return "ADULT"
 
+
+def inactive_user():
+    t = Timer(10, timeout)
+    t.start()
 
 kernel = aiml.Kernel()
 kernel.learn("std-startup.xml")
@@ -39,7 +51,9 @@ session_id = 12345
 patterns_used = set()
 
 while True:
-    message = raw_input("Enter your message to the bot: ")
+    is_timeout = 1
+    # inactive_user()
+    message = raw_input("user:")
 
     conversation_metadata = load_dictionary(conversation_metadata_filename)
     if conversation_metadata is None:
