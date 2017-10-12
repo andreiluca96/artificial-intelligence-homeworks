@@ -1,6 +1,7 @@
 import aiml
 from random import randint
 
+from error_tolerance import get_similar_template
 from storage import load_dictionary, write_dictionary
 
 
@@ -55,6 +56,9 @@ while True:
             print (annoyed_bot.respond("annoyed", session_id))
         else:
             patterns_used.add(message.lower())
+
+            message = get_similar_template(message.upper())
+
             bot_response = kernel.respond(message, session_id)
 
             username = kernel.getPredicate('username', session_id)
