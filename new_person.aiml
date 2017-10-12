@@ -1,0 +1,14 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>NEW</pattern>
+        <template>Have we talked before?</template>
+    </category>
+    <category>
+        <pattern>YES</pattern>
+        <template><formal><set name="username"><star/></set></formal>, how are you?</template>
+    </category>
+    <category>
+        <pattern>NO</pattern>
+        <template>I know a person with the same name, <formal><set name="username"><star/></set></formal>.</template>
+    </category>
+</aiml>

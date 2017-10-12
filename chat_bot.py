@@ -5,9 +5,9 @@ from storage import load_dictionary, write_dictionary
 
 
 def map_age(age):
-    if int(age) < 14:
+    if int(age) < 16:
         return "CHILD"
-    if 15 <= int(age) <= 25:
+    if 16 <= int(age) <= 25:
         return "TEENAGER"
     if int(age) > 25:
         return "ADULT"
@@ -24,6 +24,11 @@ annoyed_bot.respond("load aiml b")
 specialized_bot = aiml.Kernel()
 specialized_bot.learn("std-startup_specialized.xml")
 specialized_bot.respond("load aiml b")
+
+new_person = aiml.Kernel()
+new_person.learn("std-startup_new_person.xml")
+new_person.respond("load aiml b")
+
 
 conversation_metadata_filename = "conversation_metadata.yaml"
 questions_asked_filename = "questions_asked.yaml"
@@ -61,7 +66,6 @@ while True:
                         and len(conversation_metadata[username]['age']) > 0:
                     kernel.setPredicate('occupation', conversation_metadata[username]['occupation'], session_id)
                     kernel.setPredicate('age', conversation_metadata[username]['age'], session_id)
-
                 conversation_metadata[username] = dict()
 
                 if len(kernel.getPredicate('occupation', session_id)) <= 0:

@@ -42,11 +42,11 @@
         <pattern>CHILD</pattern>
         <template>
             <random>
-                <li>So what are your students doing?.</li>
-                <li>Did you heard the last law about the education system?</li>
-                <li>It's a great honor to speak with a teacher.</li>
-                <li>The most important person in my life was a teacher.</li>
-                <li>Did you prepared the homework for your students.</li>
+                <li>So..what do you like to play?.</li>
+                <li>Do you do anything else beside school and playing?</li>
+                <li>Hmm...What are you doing in your free time?</li>
+                <li>Where do you see yourself in 5 years?</li>
+                <li>I think that I'm going to the cinema next week to watch Despicable me. Wanna join? </li>
             </random>
         </template>
     </category>
@@ -56,11 +56,11 @@
         <pattern>TEENAGER</pattern>
         <template>
             <random>
-                <li>What's you average grade?</li>
-                <li>Do you like the things that you do in faculty?</li>
-                <li>Do you feel like the faculty is enough for you to find a job when you'll finish?</li>
-                <li>The student life is amazing, you are very lucky.</li>
-                <li>Be careful, you might have to learn for the exam.</li>
+                <li>What are your plans for the next holiday?</li>
+                <li>Hmm...I think I am going on a trip in Amsterdam</li>
+                <li>Do you like what are you doing?</li>
+                <li>I am 30 and when I was your age I was parting every weekend.</li>
+                <li>What do you like to do in your free time? </li>
             </random>
         </template>
     </category>
@@ -69,11 +69,11 @@
         <pattern>ADULT</pattern>
         <template>
             <random>
-                <li>What's you average grade?</li>
-                <li>Do you like the things that you do in faculty?</li>
-                <li>Do you feel like the faculty is enough for you to find a job when you'll finish?</li>
-                <li>The student life is amazing, you are very lucky.</li>
-                <li>Be careful, you might have to learn for the exam.</li>
+                <li>I've almost forgot that I have to pay my bills..</li>
+                <li>This town is so busy these days.</li>
+                <li>I feel like I need a break from all the work.</li>
+                <li>Do you have any hobbys?</li>
+                <li>I play tennis, if you like sports maybe we'll go someday out.</li>
             </random>
         </template>
     </category>
