@@ -4,15 +4,13 @@ import com.company.problems.State;
 import com.company.solvers.abstracts.HanoiTowerProblemSolverImpl;
 import com.company.solvers.exceptions.StuckAlgorithmException;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Luca Andrei on 10/19/2017.
  */
 public class BacktrackingHanoiTowerProblemSolver extends HanoiTowerProblemSolverImpl {
-    private Set<State> visitedStates = new HashSet<>();
+    private List<State> visitedStates = new ArrayList<>();
     private Stack<State> stateStack = new Stack<>();
 
     @Override
@@ -25,6 +23,8 @@ public class BacktrackingHanoiTowerProblemSolver extends HanoiTowerProblemSolver
             for (int j = 0; j < problem.getNumberOfRods(); j++) {
                 if (currentState.move(i, j) && !visitedStates.contains(currentState)) {
                     return;
+                } else {
+                    currentState.setStateRepresentation(new ArrayList<>(oldState.getStateRepresentation()));
                 }
             }
         }

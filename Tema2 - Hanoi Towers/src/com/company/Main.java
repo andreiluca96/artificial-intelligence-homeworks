@@ -8,7 +8,7 @@ import com.company.solvers.implementations.TotalRandomHanoiTowerProblemSolver;
 
 public class Main {
     public static void main(String[] args) {
-	    HanoiTowerProblem problem = new HanoiTowerProblem(3, 3);
+	    HanoiTowerProblem problem = new HanoiTowerProblem(4, 3);
         HanoiTowerProblemSolver problemSolver = new TotalRandomHanoiTowerProblemSolver();
 
 //        System.out.println("TotalRandom:");
