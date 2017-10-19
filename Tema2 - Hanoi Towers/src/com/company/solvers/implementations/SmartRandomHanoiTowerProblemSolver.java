@@ -1,6 +1,7 @@
-package com.company.solvers;
+package com.company.solvers.implementations;
 
 import com.company.problems.State;
+import com.company.solvers.abstracts.HanoiTowerProblemSolverImpl;
 
 /**
  * Created by Luca Andrei on 10/19/2017.

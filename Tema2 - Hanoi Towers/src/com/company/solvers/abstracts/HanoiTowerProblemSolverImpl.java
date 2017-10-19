@@ -1,7 +1,8 @@
-package com.company.solvers;
+package com.company.solvers.abstracts;
 
 import com.company.problems.HanoiTowerProblem;
 import com.company.problems.State;
+import com.company.solvers.exceptions.StuckAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public abstract class HanoiTowerProblemSolverImpl implements HanoiTowerProblemSo
     protected HanoiTowerProblem problem;
 
     @Override
-    public List<State> solve(HanoiTowerProblem problem) {
+    public List<State> solve(HanoiTowerProblem problem) throws StuckAlgorithmException {
         this.problem = problem;
         State currentState = new State(problem.getNumberOfDiscs(), problem.getNumberOfRods());
 
@@ -30,5 +31,5 @@ public abstract class HanoiTowerProblemSolverImpl implements HanoiTowerProblemSo
         return gameHistory;
     }
 
-    protected abstract void applyTransition(State currentState);
+    protected abstract void applyTransition(State currentState) throws StuckAlgorithmException;
 }

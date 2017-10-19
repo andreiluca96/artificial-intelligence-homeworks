@@ -70,6 +70,14 @@ public class State {
         return true;
     }
 
+    public List<Integer> getStateRepresentation() {
+        return stateRepresentation;
+    }
+
+    public void setStateRepresentation(List<Integer> stateRepresentation) {
+        this.stateRepresentation = stateRepresentation;
+    }
+
     public int getNumberOfDiscs() {
         return numberOfDiscs;
     }
@@ -98,5 +106,26 @@ public class State {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        State state = (State) o;
+
+        if (numberOfDiscs != state.numberOfDiscs) return false;
+        if (numberOfRods != state.numberOfRods) return false;
+        return stateRepresentation.equals(state.stateRepresentation);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = numberOfDiscs;
+        result = 31 * result + numberOfRods;
+        result = 31 * result + stateRepresentation.hashCode();
+        return result;
     }
 }
