@@ -6,9 +6,11 @@ import com.company.solvers.TotalRandomHanoiTowerProblemSolver;
 
 public class Main {
     public static void main(String[] args) {
-	    HanoiTowerProblem problem = new HanoiTowerProblem(1, 3);
+	    HanoiTowerProblem problem = new HanoiTowerProblem(2, 3);
         HanoiTowerProblemSolver problemSolver = new TotalRandomHanoiTowerProblemSolver();
-        System.out.println(problemSolver.solve(problem));
+
+        System.out.println("Total random:");
+        problemSolver.solve(problem).forEach(System.out::println);
 
     }
 }

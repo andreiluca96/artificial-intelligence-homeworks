@@ -92,11 +92,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "State{" +
-                "numberOfDiscs=" + numberOfDiscs +
-                ", numberOfRods=" + numberOfRods +
-                ", stateRepresentation=" + stateRepresentation +
-                '}';
+        return String.valueOf(stateRepresentation);
     }
 
     @Override
