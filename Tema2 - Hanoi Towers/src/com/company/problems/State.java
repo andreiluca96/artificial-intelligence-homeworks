@@ -9,6 +9,8 @@ import static com.google.common.base.Preconditions.*;
  * Created by Luca Andrei on 10/18/2017.
  */
 public class State {
+    private static final int FIRST_ROD_POSITION = 1;
+    private static final int MINIM_NUMBER_OF_DISCS = 3;
     private int numberOfDiscs;
     private int numberOfRods;
 
@@ -21,8 +23,8 @@ public class State {
     }
 
     public State(int numberOfDiscs, int numberOfRods) {
-        checkArgument(numberOfRods >= 3, "The number of rods should be greater than 3.");
-        checkArgument(numberOfDiscs >= 1, "The number of discs should be greater than 1.");
+        checkArgument(numberOfRods >= MINIM_NUMBER_OF_DISCS, "The number of rods should be greater than 3.");
+        checkArgument(numberOfDiscs >= FIRST_ROD_POSITION, "The number of discs should be greater than 1.");
 
         stateRepresentation = new ArrayList<>();
         for (int i = 0; i < numberOfDiscs; i++) {
@@ -43,6 +45,20 @@ public class State {
         return -1;
     }
 
+    public boolean validTransition (int disc, int rod) {
+        if (stateRepresentation.get(disc).equals(rod)) {
+            return false;
+        }
+
+        for (int i = disc - 1; i >= 0; i--) {
+            if (stateRepresentation.get(disc).equals(stateRepresentation.get(i)) ||
+                    stateRepresentation.get(i).equals(rod)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean move(int disc, int rod) {
         if (stateRepresentation.get(disc).equals(rod)) {
             return false;
@@ -58,6 +74,13 @@ public class State {
         stateRepresentation.set(disc, rod);
 
         return true;
+    }
+
+    public List<Integer> generateInitialState(int disc, int state){
+        for (int i = 0; i < numberOfDiscs; i++) {
+            stateRepresentation.add(FIRST_ROD_POSITION);
+        }
+        return stateRepresentation;
     }
 
     public boolean isFinal() {
@@ -76,6 +99,10 @@ public class State {
 
     public void setStateRepresentation(List<Integer> stateRepresentation) {
         this.stateRepresentation = stateRepresentation;
+    }
+
+    public void setStateRepresentation(int disc, int rod) {
+        stateRepresentation.set(disc, rod);
     }
 
     public int getNumberOfDiscs() {
@@ -103,6 +130,11 @@ public class State {
         return String.valueOf(stateRepresentation);
     }
 
+    public void copySolutionList (List<Integer> solution) {
+        for (int i = 0; i < numberOfDiscs; i++) {
+            solution.set(i,stateRepresentation.get(i));
+        }
+    }
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
