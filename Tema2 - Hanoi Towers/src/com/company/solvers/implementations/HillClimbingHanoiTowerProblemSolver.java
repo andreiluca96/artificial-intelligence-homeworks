@@ -4,48 +4,63 @@ import com.company.problems.State;
 import com.company.solvers.abstracts.HanoiTowerProblemSolverImpl;
 import com.company.solvers.exceptions.StuckAlgorithmException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * Created by Luca Andrei on 10/19/2017.
  */
 public class HillClimbingHanoiTowerProblemSolver extends HanoiTowerProblemSolverImpl {
-    private State currentState;
-    private State generatedState;
-    private int numberOfDiscs;
-    private int numberOfRods;
     private int chosenDisc;
     private int chosenRod;
-    private int currentFitness;
-    private int generatedFitness;
-    Random random;
+    private double currentFitness;
+    private double oldFitness;
+    Random random = new Random();
+    private List<State> visitedStates = new ArrayList<>();
+    private Stack<State> stateStack = new Stack<>();
 
     @Override
     protected void applyTransition(State currentState) throws StuckAlgorithmException {
-        currentState.generateInitialState(numberOfDiscs, numberOfRods);
-        generatedState.generateInitialState(numberOfDiscs, numberOfRods);
-        while(!currentState.isFinal()){
-            chosenDisc=random.nextInt(problem.getNumberOfDiscs());
-            chosenRod=random.nextInt(problem.getNumberOfRods());
-            if (generatedState.validTransition(chosenDisc, chosenRod)){
-                generatedState.setStateRepresentation(chosenDisc, chosenRod);
-                generatedFitness = calculateFitness(generatedState.getStateRepresentation());
+        State oldState = new State(currentState);
+        stateStack.push(oldState);
+        int limit = 0;
+        while (limit != 100) {
+            chosenDisc = random.nextInt(problem.getNumberOfDiscs());
+            chosenRod = random.nextInt(problem.getNumberOfRods());
+            if (currentState.move(chosenDisc,chosenRod) && !visitedStates.contains((currentState))) {
+                oldFitness = calculateFitness(oldState.getStateRepresentation());
                 currentFitness = calculateFitness(currentState.getStateRepresentation());
-                if (generatedFitness<currentFitness) {
-                    currentState.move(chosenDisc, chosenRod);
+                visitedStates.add(new State(currentState));
+                if (currentFitness <= oldFitness) {
+                    return;
                 }
                 else {
-                    currentState.copySolutionList(generatedState.getStateRepresentation());
+                    currentState.setStateRepresentation(new ArrayList<>(oldState.getStateRepresentation()));
                 }
             }
+            limit++;
         }
+        stateStack.pop();
+        currentState.setStateRepresentation(stateStack.peek().getStateRepresentation());
+        stateStack.pop();
     }
 
-    public int calculateFitness(List<Integer> solution) {
-        int fitness = 0;
-        for (int i = 0; i < numberOfDiscs; i++) {
-            fitness+= numberOfRods - solution.get(i);
+    public double calculateFitness(List<Integer> solution) {
+        double fitness = 0;
+        for (int i = 0; i < problem.getNumberOfDiscs(); i++) {
+            if(solution.get(i)< problem.getNumberOfRods()) {
+                fitness += 1;
+            } else {
+                for(int j = 0; j<i; j++ ) {
+                    if( solution.get(i)<solution.get(j)) {
+                        fitness += 2;
+                    }
+                }
+            }
+            fitness = 1/(double)(fitness);
+
         }
         return fitness;
     }

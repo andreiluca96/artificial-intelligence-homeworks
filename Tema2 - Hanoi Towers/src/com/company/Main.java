@@ -4,6 +4,8 @@ import com.company.problems.HanoiTowerProblem;
 import com.company.solvers.abstracts.HanoiTowerProblemSolver;
 import com.company.solvers.exceptions.StuckAlgorithmException;
 import com.company.solvers.implementations.BacktrackingHanoiTowerProblemSolver;
+import com.company.solvers.implementations.HillClimbingHanoiTowerProblemSolver;
+import com.company.solvers.implementations.SmartRandomHanoiTowerProblemSolver;
 import com.company.solvers.implementations.TotalRandomHanoiTowerProblemSolver;
 
 public class Main {
@@ -18,7 +20,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        problemSolver = new BacktrackingHanoiTowerProblemSolver();
+        problemSolver = new HillClimbingHanoiTowerProblemSolver();
         System.out.println("Backtracking:");
         try {
             problemSolver.solve(problem).forEach(System.out::println);
