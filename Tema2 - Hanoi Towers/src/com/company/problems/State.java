@@ -83,6 +83,16 @@ public class State {
         return stateRepresentation;
     }
 
+    public boolean isInitial() {
+        for (int i = 0; i < numberOfDiscs; i++) {
+            if (!stateRepresentation.get(i).equals(0)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public boolean isFinal() {
         for (int i = 0; i < numberOfDiscs; i++) {
             if (!stateRepresentation.get(i).equals(numberOfRods - 1)) {
