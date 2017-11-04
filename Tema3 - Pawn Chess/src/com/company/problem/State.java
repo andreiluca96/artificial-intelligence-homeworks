@@ -1,83 +1,105 @@
 package com.company.problem;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.abs;
+
 /**
  * Created by Ariana on 11/4/2017.
  */
 public class State {
-    private int numberOfWhitePawns;
-    private int numberOfBlackPawns;
-    public List<Integer> stateListWhitePawns;
-    public List<Integer> stateListBlackPawns;
+    private int dimension;
+    private List<Pawn> whitePawns = new ArrayList<>();
+    private List<Pawn> blackPawns = new ArrayList<>();
 
     public State(State state) {
-        this.numberOfBlackPawns = state.numberOfBlackPawns;
-        this.numberOfWhitePawns = state.numberOfWhitePawns;
-        this.stateListBlackPawns = state.stateListBlackPawns;
-        this.stateListWhitePawns = state.stateListWhitePawns;
+        this.dimension = state.dimension;
+        this.whitePawns = state.whitePawns;
+        this.blackPawns = state.blackPawns;
     }
 
-    public State(int numberOfWhitePawns, int numberOfBlackPawns) {
-        this.setInitialState();
-        this.numberOfWhitePawns = numberOfWhitePawns;
-        this.numberOfBlackPawns = numberOfBlackPawns;
+    public State(int dimension, List<Pawn> whitePawns, List<Pawn> blackPawns) {
+        this.dimension = dimension;
+        this.whitePawns = whitePawns;
+        this.blackPawns = blackPawns;
     }
 
-    public void setInitialState() {
-        for (int i = 0; i < 8; i++) {
-            stateListWhitePawns.add(0);
-            stateListBlackPawns.add(0);
-        }
-    }
-
-    public List<State> getPossibleNextMoves() {
-        for (int i = 0; i<8; i++) {
-
-        }
-    }
-
-    public boolean move(int pawn, int postion) {
-        if (stateListBlackPawns.contains(postion)) {
+    public boolean moveWhite(Pawn oldPawn , Pawn newPawn) {
+        if (!validatePosition(newPawn) || !whitePawns.contains(oldPawn)) {
             return false;
         }
-        for (int i = 0; i < 8; i++)
-        {
 
+        if (oldPawn.getLine() == 1
+                && oldPawn.getColumn() == newPawn.getColumn()
+                && newPawn.getColumn() == 3) {
+            whitePawns.remove(oldPawn);
+            whitePawns.add(newPawn);
+
+            return true;
         }
+
+        if (oldPawn.getColumn() == newPawn.getColumn()
+                && newPawn.getLine() - oldPawn.getLine() == 1) {
+            whitePawns.remove(oldPawn);
+            whitePawns.add(newPawn);
+
+            return true;
+        }
+
+        if (newPawn.getLine() - oldPawn.getLine() == 1
+                && abs(newPawn.getColumn() - oldPawn.getColumn()) == 1
+                && blackPawns.contains(newPawn)) {
+            whitePawns.remove(oldPawn);
+            whitePawns.add(newPawn);
+
+            blackPawns.remove(newPawn);
+
+            return true;
+        }
+
+
+        return false;
     }
 
-    public int getNumberOfWhitePawns() {
-        return numberOfWhitePawns;
+    public boolean moveBlack(Pawn oldPawn , Pawn newPawn) {
+        if (!validatePosition(newPawn)) {
+            return false;
+        }
+
+        int pawnOwner = -1;
+        return false;
     }
 
-    public void setNumberOfWhitePawns(int numberOfWhitePawns) {
-        this.numberOfWhitePawns = numberOfWhitePawns;
+    private boolean validatePosition(Pawn newPawn) {
+        if (newPawn.getColumn() > dimension && newPawn.getLine() > dimension
+                && newPawn.getColumn() >= 0 && newPawn.getLine() >=0) {
+            return false;
+        }
+        return true;
     }
 
-    public int getNumberOfBlackPawns() {
-        return numberOfBlackPawns;
+    public int getDimension() {
+        return dimension;
     }
 
-    public void setNumberOfBlackPawns(int numberOfBlackPawns) {
-        this.numberOfBlackPawns = numberOfBlackPawns;
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
     }
 
-    public List<Integer> getStateListWhitePawns() {
-        return stateListWhitePawns;
+    public List<Pawn> getWhitePawns() {
+        return whitePawns;
     }
 
-    public void setStateListWhitePawns(List<Integer> stateListWhitePawns) {
-        this.stateListWhitePawns = stateListWhitePawns;
+    public void setWhitePawns(List<Pawn> whitePawns) {
+        this.whitePawns = whitePawns;
     }
 
-    public List<Integer> getStateListBlackPawns() {
-        return stateListBlackPawns;
+    public List<Pawn> getBlackPawns() {
+        return blackPawns;
     }
 
-    public void setStateListBlackPawns(List<Integer> stateListBlackPawns) {
-        this.stateListBlackPawns = stateListBlackPawns;
+    public void setBlackPawns(List<Pawn> blackPawns) {
+        this.blackPawns = blackPawns;
     }
-
-
-
-
 }

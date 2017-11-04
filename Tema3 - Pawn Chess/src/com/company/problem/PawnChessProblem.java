@@ -4,27 +4,17 @@ package com.company.problem;
  * Created by Ariana on 11/4/2017.
  */
 public class PawnChessProblem {
-    private int numberOfWhitePawns;
-    private int numberOfBlackPawns;
+    private int dimension;
 
-    public PawnChessProblem(int numberOfWhitePawns, int numberOfBlackPawns) {
-        this.numberOfWhitePawns = numberOfWhitePawns;
-        this.numberOfBlackPawns = numberOfBlackPawns;
+    public PawnChessProblem(int dimension) {
+        this.dimension = dimension;
     }
 
-    public int getNumberOfWhitePawns() {
-        return numberOfWhitePawns;
+    public int getDimension() {
+        return dimension;
     }
 
-    public void setNumberOfWhitePawns(int numberOfWhitePawns) {
-        this.numberOfWhitePawns = numberOfWhitePawns;
-    }
-
-    public int getNumberOfBlackPawns() {
-        return numberOfBlackPawns;
-    }
-
-    public void setNumberOfBlackPawns(int numberOfBlackPawns) {
-        this.numberOfBlackPawns = numberOfBlackPawns;
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
     }
 }
