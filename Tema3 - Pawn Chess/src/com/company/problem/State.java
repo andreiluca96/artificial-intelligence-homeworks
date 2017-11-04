@@ -19,10 +19,12 @@ public class State {
         this.blackPawns = state.blackPawns;
     }
 
-    public State(int dimension, List<Pawn> whitePawns, List<Pawn> blackPawns) {
+    public State(int dimension) {
+        for (int i = 0;i<dimension; i++) {
+            whitePawns.add(new Pawn(1,i));
+            blackPawns.add(new Pawn(6,i));
+        }
         this.dimension = dimension;
-        this.whitePawns = whitePawns;
-        this.blackPawns = blackPawns;
     }
 
     public boolean moveWhite(Pawn oldPawn , Pawn newPawn) {
@@ -32,7 +34,9 @@ public class State {
 
         if (oldPawn.getLine() == 1
                 && oldPawn.getColumn() == newPawn.getColumn()
-                && newPawn.getColumn() == 3) {
+                && newPawn.getColumn() == 3
+                && !whitePawns.contains(newPawn)
+                && !blackPawns.contains(newPawn)){
             whitePawns.remove(oldPawn);
             whitePawns.add(newPawn);
 
@@ -71,7 +75,9 @@ public class State {
 
         if (oldPawn.getLine() == 6
                 && oldPawn.getColumn() == newPawn.getColumn()
-                && newPawn.getColumn() == 4) {
+                && newPawn.getColumn() == 4
+                && !whitePawns.contains(newPawn)
+                && !blackPawns.contains(newPawn)) {
             blackPawns.remove(oldPawn);
             blackPawns.add(newPawn);
 
@@ -109,6 +115,40 @@ public class State {
             return false;
         }
         return true;
+    }
+
+    public List<State> generatePossibleState(boolean isWhitePawn) {
+        List<State> possibleStates = new ArrayList<>();
+        if(isWhitePawn) {
+            for(Pawn pawn : whitePawns) {
+                for(int i=0; i< 3; i++) {
+                    State newState = new State(this);
+                    if(newState.moveWhite(pawn, new Pawn(pawn.getLine()+1, pawn.getColumn()+i-1))) {
+                        possibleStates.add(newState);
+                    }
+                }
+                if(pawn.getLine()== 1) {
+                    State newState = new State(this);
+                    newState.moveWhite(pawn, new Pawn(3, pawn.getColumn()));
+                    possibleStates.add(newState);
+                }
+            }
+            return possibleStates;
+        }
+        for(Pawn pawn : blackPawns) {
+            for(int i=0; i< 3; i++) {
+                State newState = new State(this);
+                if(newState.moveBlack(pawn, new Pawn(pawn.getLine()-1, pawn.getColumn()+i-1))) {
+                    possibleStates.add(newState);
+                }
+            }
+            if(pawn.getLine()==6) {
+                State newState = new State(this);
+                newState.moveWhite(pawn, new Pawn(4, pawn.getColumn()));
+                possibleStates.add(newState);
+            }
+        }
+        return possibleStates;
     }
 
     public int getDimension() {
