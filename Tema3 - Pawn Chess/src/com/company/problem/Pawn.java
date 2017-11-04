@@ -3,12 +3,15 @@ package com.company.problem;
 public class Pawn {
     private int line;
     private int column;
-    private boolean eaten;
 
     public Pawn(int line, int column) {
         this.line = line;
         this.column = column;
-        this.eaten = false;
+    }
+
+    public Pawn(Pawn pawn) {
+        this.line = pawn.line;
+        this.column = pawn.column;
     }
 
     public int getLine() {
@@ -27,11 +30,29 @@ public class Pawn {
         this.column = column;
     }
 
-    public boolean isEaten() {
-        return eaten;
+    @Override
+    public String toString() {
+        return "Pawn{" +
+                "line=" + line +
+                ", column=" + column +
+                '}';
     }
 
-    public void setEaten(boolean eaten) {
-        this.eaten = eaten;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pawn pawn = (Pawn) o;
+
+        if (line != pawn.line) return false;
+        return column == pawn.column;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = line;
+        result = 31 * result + column;
+        return result;
     }
 }

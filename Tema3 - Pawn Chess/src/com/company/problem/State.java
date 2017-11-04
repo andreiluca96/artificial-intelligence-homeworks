@@ -15,8 +15,8 @@ public class State {
 
     public State(State state) {
         this.dimension = state.dimension;
-        this.whitePawns = state.whitePawns;
-        this.blackPawns = state.blackPawns;
+        this.whitePawns = new ArrayList<>(state.whitePawns);
+        this.blackPawns = new ArrayList<>(state.blackPawns);
     }
 
     public State(int dimension) {
@@ -34,7 +34,7 @@ public class State {
 
         if (oldPawn.getLine() == 1
                 && oldPawn.getColumn() == newPawn.getColumn()
-                && newPawn.getColumn() == 3
+                && newPawn.getLine() == 3
                 && !whitePawns.contains(newPawn)
                 && !blackPawns.contains(newPawn)){
             whitePawns.remove(oldPawn);
@@ -75,7 +75,7 @@ public class State {
 
         if (oldPawn.getLine() == 6
                 && oldPawn.getColumn() == newPawn.getColumn()
-                && newPawn.getColumn() == 4
+                && newPawn.getLine() == 4
                 && !whitePawns.contains(newPawn)
                 && !blackPawns.contains(newPawn)) {
             blackPawns.remove(oldPawn);
@@ -110,11 +110,8 @@ public class State {
     }
 
     private boolean validatePosition(Pawn newPawn) {
-        if (newPawn.getColumn() >= dimension || newPawn.getLine() >= dimension
-                || newPawn.getColumn() < 0 || newPawn.getLine() < 0) {
-            return false;
-        }
-        return true;
+        return newPawn.getColumn() < dimension && newPawn.getLine() < dimension
+                && newPawn.getColumn() >= 0 && newPawn.getLine() >= 0;
     }
 
     public List<State> generatePossibleState(boolean isWhitePawn) {
@@ -123,54 +120,53 @@ public class State {
             for(Pawn pawn : whitePawns) {
                 for(int i=0; i< 3; i++) {
                     State newState = new State(this);
-                    if(newState.moveWhite(pawn, new Pawn(pawn.getLine()+1, pawn.getColumn()+i-1))) {
+                    if(newState.moveWhite(pawn, new Pawn(pawn.getLine() + 1, pawn.getColumn() + i - 1))) {
                         possibleStates.add(newState);
                     }
                 }
-                if(pawn.getLine()== 1) {
+
+                if(pawn.getLine() == 1) {
                     State newState = new State(this);
                     newState.moveWhite(pawn, new Pawn(3, pawn.getColumn()));
                     possibleStates.add(newState);
                 }
             }
             return possibleStates;
-        }
-        for(Pawn pawn : blackPawns) {
-            for(int i=0; i< 3; i++) {
-                State newState = new State(this);
-                if(newState.moveBlack(pawn, new Pawn(pawn.getLine()-1, pawn.getColumn()+i-1))) {
+        } else {
+            for(Pawn pawn : blackPawns) {
+                for(int i=0; i< 3; i++) {
+                    State newState = new State(this);
+                    if(newState.moveBlack(pawn, new Pawn(pawn.getLine()-1, pawn.getColumn()+i-1))) {
+                        possibleStates.add(newState);
+                    }
+                }
+                if(pawn.getLine() == 6) {
+                    State newState = new State(this);
+                    newState.moveWhite(pawn, new Pawn(4, pawn.getColumn()));
                     possibleStates.add(newState);
                 }
-            }
-            if(pawn.getLine()==6) {
-                State newState = new State(this);
-                newState.moveWhite(pawn, new Pawn(4, pawn.getColumn()));
-                possibleStates.add(newState);
             }
         }
         return possibleStates;
     }
 
-    public boolean isFinalState() {
-        for (int i = 0; i< dimension; i++) {
-            if(whitePawns.contains(new Pawn(7,i)) || blackPawns.contains(new Pawn(1,i))) {
+    public  boolean isFinalState() {
+        for (int i = 0; i < dimension; i++) {
+            if(whitePawns.contains(new Pawn(7,i)) || blackPawns.contains(new Pawn(0,i))) {
                 return true;
             }
         }
-        if (this.generatePossibleState(true).isEmpty()|| (this.generatePossibleState(false).isEmpty())) {
-            return true;
-        }
-        return false;
+        return this.generatePossibleState(true).isEmpty()
+                || (this.generatePossibleState(false).isEmpty());
     }
 
-    public int getWinnerWinnerChickAtDinner() {
-
+    public int getWinner() {
         if(this.isFinalState()) {
             for (int i = 0; i< dimension; i++) {
                 if (whitePawns.contains(new Pawn(7, i))) {
                     return 1;
                 }
-                if (blackPawns.contains(new Pawn(1, i))) {
+                if (blackPawns.contains(new Pawn(0, i))) {
                     return -1;
                 }
             }
@@ -201,5 +197,41 @@ public class State {
 
     public void setBlackPawns(List<Pawn> blackPawns) {
         this.blackPawns = blackPawns;
+    }
+
+    public void printState() {
+        char [][] matrix = new char[9][9];
+
+        for (int i = 0; i <= 8; i++) {
+            for (int j = 0; j <= 8; j++) {
+                if (i == 8) {
+                    matrix[i][j] = String.valueOf(j).charAt(0);
+                    continue;
+                }
+                if (j == 0) {
+                    matrix[i][j] = String.valueOf(i + 1).charAt(0);
+                    continue;
+                }
+
+                matrix[i][j] = '0';
+            }
+        }
+
+        for (Pawn pawn : this.getWhitePawns()) {
+            matrix[pawn.getLine()][pawn.getColumn() + 1] = 'W';
+        }
+        for (Pawn pawn : this.getBlackPawns()) {
+            matrix[pawn.getLine()][pawn.getColumn() + 1] = 'B';
+        }
+
+
+        for (int i = 0; i <= 8; i++) {
+            for (int j = 0; j <= 8; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+
+        System.out.print("\n\n");
     }
 }
