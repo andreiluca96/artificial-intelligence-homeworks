@@ -151,6 +151,31 @@ public class State {
         return possibleStates;
     }
 
+    public boolean isFinalState() {
+        for (int i = 0; i< dimension; i++) {
+            if(whitePawns.contains(new Pawn(7,i)) || blackPawns.contains(new Pawn(1,i))) {
+                return true;
+            }
+        }
+        if (this.generatePossibleState(true).isEmpty()|| (this.generatePossibleState(false).isEmpty())) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getWinnerWinnerChickAtDinner() {
+        if(this.isFinalState()) {
+            if(whitePawns.contains(new Pawn(7,i))){
+                return 1;
+            }
+            if(blackPawns.contains(new Pawn(1,i))) {
+                return -1;
+            }
+            return 0;
+        }
+        throw new IllegalStateException();
+    }
+
     public int getDimension() {
         return dimension;
     }
