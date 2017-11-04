@@ -40,7 +40,9 @@ public class State {
         }
 
         if (oldPawn.getColumn() == newPawn.getColumn()
-                && newPawn.getLine() - oldPawn.getLine() == 1) {
+                && newPawn.getLine() - oldPawn.getLine() == 1
+                && !whitePawns.contains(newPawn)
+                && !blackPawns.contains(newPawn)) {
             whitePawns.remove(oldPawn);
             whitePawns.add(newPawn);
 
@@ -63,17 +65,47 @@ public class State {
     }
 
     public boolean moveBlack(Pawn oldPawn , Pawn newPawn) {
-        if (!validatePosition(newPawn)) {
+        if (!validatePosition(newPawn) || !blackPawns.contains(oldPawn)) {
             return false;
         }
 
-        int pawnOwner = -1;
+        if (oldPawn.getLine() == 6
+                && oldPawn.getColumn() == newPawn.getColumn()
+                && newPawn.getColumn() == 4) {
+            blackPawns.remove(oldPawn);
+            blackPawns.add(newPawn);
+
+            return true;
+        }
+
+        if (oldPawn.getColumn() == newPawn.getColumn()
+                && oldPawn.getLine() - newPawn.getLine() == 1
+                && !whitePawns.contains(newPawn)
+                && !blackPawns.contains(newPawn)) {
+            blackPawns.remove(oldPawn);
+            blackPawns.add(newPawn);
+
+            return true;
+        }
+
+        if (oldPawn.getLine() - newPawn.getLine() == 1
+                && abs(oldPawn.getColumn() - newPawn.getColumn()) == 1
+                && whitePawns.contains(newPawn)) {
+            blackPawns.remove(oldPawn);
+            blackPawns.add(newPawn);
+
+            whitePawns.remove(newPawn);
+
+            return true;
+        }
+
+
         return false;
     }
 
     private boolean validatePosition(Pawn newPawn) {
-        if (newPawn.getColumn() > dimension && newPawn.getLine() > dimension
-                && newPawn.getColumn() >= 0 && newPawn.getLine() >=0) {
+        if (newPawn.getColumn() >= dimension || newPawn.getLine() >= dimension
+                || newPawn.getColumn() < 0 || newPawn.getLine() < 0) {
             return false;
         }
         return true;
