@@ -55,9 +55,9 @@ public class PawnChessBrain {
                 maximumState = stateNode.state;
                 listOfMaximums.add(maximumState);
             }
-            if (maximum < stateNode.score) {
-                for(State state  : listOfMaximums) {
-                    listOfMaximums.remove(state);
+            if (maximum < stateNode.score ) {
+                if(!listOfMaximums.isEmpty()) {
+                    listOfMaximums.clear();
                 }
                 maximum = stateNode.score;
                 maximumState = stateNode.state;
@@ -109,7 +109,7 @@ public class PawnChessBrain {
              */
 
             double maximum = MINUS_INFINITY;
-            
+
             for (StateNode child : stateNode.children) {
                 if (maximum < child.score) {
                     maximum = child.score;
