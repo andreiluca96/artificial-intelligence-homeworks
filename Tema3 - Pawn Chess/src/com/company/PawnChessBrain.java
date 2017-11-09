@@ -71,7 +71,7 @@ public class PawnChessBrain {
         }
         Random random = new Random();
         double mistake = random.nextDouble();
-        if(( mistake > 0.15) && ( mistake < 0.35 )){
+        if(( mistake > 0.35) && ( mistake < 0.45 )){
             int index = random.nextInt(listOfRemaining.size());
             maximumState= listOfRemaining.get(index);
         }else {
