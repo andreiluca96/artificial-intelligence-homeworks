@@ -5,6 +5,7 @@ import com.company.problem.State;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.lang.Math.exp;
 
@@ -46,14 +47,26 @@ public class PawnChessBrain {
             Choose the best from the available moves.
          */
         double maximum = MINUS_INFINITY;
+        List<State> listOfMaximums = new ArrayList<>();
         State maximumState = null;
         for (StateNode stateNode : stateTree.root.children) {
-            if (maximum < stateNode.score) {
+            if (maximum == stateNode.score) {
                 maximum = stateNode.score;
                 maximumState = stateNode.state;
+                listOfMaximums.add(maximumState);
+            }
+            if (maximum < stateNode.score) {
+                for(State state  : listOfMaximums) {
+                    listOfMaximums.remove(state);
+                }
+                maximum = stateNode.score;
+                maximumState = stateNode.state;
+                listOfMaximums.add(maximumState);
             }
         }
-
+        Random random = new Random();
+        int index = random.nextInt(listOfMaximums.size());
+        maximumState = listOfMaximums.get(index);
         return maximumState;
     }
 
@@ -96,7 +109,7 @@ public class PawnChessBrain {
              */
 
             double maximum = MINUS_INFINITY;
-
+            
             for (StateNode child : stateNode.children) {
                 if (maximum < child.score) {
                     maximum = child.score;
@@ -104,6 +117,7 @@ public class PawnChessBrain {
             }
 
             stateNode.score = maximum;
+
         } else {
             /*
             choose minimum from children.
