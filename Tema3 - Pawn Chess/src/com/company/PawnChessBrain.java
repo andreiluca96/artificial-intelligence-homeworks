@@ -65,13 +65,13 @@ public class PawnChessBrain {
                 maximumState = stateNode.state;
                 listOfMaximums.add(maximumState);
             }
-            else {
+            if(maximum > stateNode.score ) {
                 listOfRemaining.add(stateNode.state);
             }
         }
         Random random = new Random();
         double mistake = random.nextDouble();
-        if(mistake < 0.3){
+        if(( mistake > 0.15) && ( mistake < 0.35 )){
             int index = random.nextInt(listOfRemaining.size());
             maximumState= listOfRemaining.get(index);
         }else {
