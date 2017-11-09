@@ -114,6 +114,14 @@ public class State {
                 && newPawn.getColumn() >= 0 && newPawn.getLine() >= 0;
     }
 
+    public boolean isChosenPawnValid (Pawn pawn)
+    {
+        if (!blackPawns.contains(pawn)) {
+            return false;
+        }
+        return true;
+    }
+
     public List<State> generatePossibleState(boolean isWhitePawn) {
         List<State> possibleStates = new ArrayList<>();
         if(isWhitePawn) {

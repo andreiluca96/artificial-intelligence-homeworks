@@ -23,8 +23,21 @@ public class Main {
             System.out.println("Insert the pawn you want to move: ");
             Pawn currentPawn = new Pawn(scan.nextInt() - 1, scan.nextInt() - 1);
 
+            while(!state.isChosenPawnValid(currentPawn)) {
+                System.out.println("Pawn doesn't exist: ");
+                System.out.println("Insert the pawn you want to move: ");
+                currentPawn = new Pawn(scan.nextInt() - 1, scan.nextInt() - 1);
+            }
+
             System.out.println("Insert the position to which you want to move: ");
             Pawn movedPawn = new Pawn(scan.nextInt() - 1, scan.nextInt() - 1);
+
+            while(!state.moveBlack(currentPawn, movedPawn)) {
+                System.out.println("Inserted position is not valid ");
+                System.out.println("Insert the position to which you want to move: ");
+
+                movedPawn = new Pawn(scan.nextInt() - 1, scan.nextInt() - 1);
+            }
 
 //        Pawn currentPawn = new Pawn(7 - 1, 1 - 1);
 //        Pawn movedPawn = new Pawn(5 - 1, 1 - 1);
