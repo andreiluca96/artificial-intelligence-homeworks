@@ -41,6 +41,32 @@ public class PawnChessBrain {
             }
         }
 
+        for (StateNode stateNode1 : stateTree.root.children) {
+            for (StateNode stateNode2 : stateNode1.children) {
+                for (State state : stateNode2.state.generatePossibleState(true)) {
+                    StateNode newStateNode = new StateNode();
+                    newStateNode.state = state;
+                    newStateNode.parent = stateTree.root;
+
+                    stateNode2.children.add(newStateNode);
+                }
+            }
+        }
+
+        for (StateNode stateNode1 : stateTree.root.children) {
+            for (StateNode stateNode2 : stateNode1.children) {
+                for (StateNode stateNode3 : stateNode2.children) {
+                    for (State state : stateNode3.state.generatePossibleState(false)) {
+                        StateNode newStateNode = new StateNode();
+                        newStateNode.state = state;
+                        newStateNode.parent = stateTree.root;
+
+                        stateNode3.children.add(newStateNode);
+                    }
+                }
+            }
+        }
+
         postOrderTraversalWithMinMax(stateTree.root, 0);
 
         /*
@@ -49,14 +75,14 @@ public class PawnChessBrain {
         double maximum = MINUS_INFINITY;
         List<State> listOfMaximums = new ArrayList<>();
         List<State> listOfRemaining = new ArrayList<>();
-        State maximumState = null;
+        State maximumState;
         for (StateNode stateNode : stateTree.root.children) {
             if (maximum == stateNode.score) {
                 maximum = stateNode.score;
                 maximumState = stateNode.state;
                 listOfMaximums.add(maximumState);
             }
-            if (maximum < stateNode.score ) {
+            if (maximum < stateNode.score) {
                 if(!listOfMaximums.isEmpty()) {
                     listOfRemaining.add(listOfMaximums.get(0));
                     listOfMaximums.clear();
@@ -73,8 +99,8 @@ public class PawnChessBrain {
         double mistake = random.nextDouble();
         if(( mistake > 0.35) && ( mistake < 0.45 )){
             int index = random.nextInt(listOfRemaining.size());
-            maximumState= listOfRemaining.get(index);
-        }else {
+            maximumState = listOfRemaining.get(index);
+        } else {
             int index = random.nextInt(listOfMaximums.size());
             maximumState = listOfMaximums.get(index);
         }
