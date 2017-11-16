@@ -1,0 +1,7 @@
+cainele:
+- {definition: este un mamifer, offset: 31}
+mamiferele:
+- {definition: sunt niste animale, offset: 0}
+porumbelul:
+- {not a definition: nu este un mamifer, offset: 82}
+- {definition: este o pasare, offset: 56}
